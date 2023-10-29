@@ -1,19 +1,28 @@
 import threading
 import socket
 
-host = '127.0.0.1' # locahost
+host = '127.0.0.1'  # locahost
 port = 5555
 
-server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+# creating a server via using socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# server combines with host and port
 server.bind((host, port))
 server.listen()
 
+# clients and nicknames list
 clients = []
 nicknames = []
+
+
+# distributes the message to all clients
 def broadcast(message):
     for client in clients:
         client.send(message)
 
+
+# this receives messages and call broadcast func
 def handle(client):
     while True:
         try:
@@ -28,9 +37,11 @@ def handle(client):
             nicknames.remove(nickname)
             break
 
+
+# this handles all connectivity between each client
 def receive():
     while True:
-        client,adress = server.accept()
+        client, adress = server.accept()
         print(f"Connected with {str(adress)}")
 
         client.send('NICK'.encode('ascii'))
@@ -42,9 +53,11 @@ def receive():
         broadcast(f'{nickname} joined the chat!'.encode('ascii'))
         client.send('Connected to the server!'.encode('ascii'))
 
-        thread = threading.Thread(target=handle,args=(client,))
+        thread = threading.Thread(target=handle, args=(client,))
         thread.start()
 
-print("Server is listening...")
 
+# the main part !!!
+# starts the server
+print("Server is listening...")
 receive()
