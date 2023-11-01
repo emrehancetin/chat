@@ -1,10 +1,10 @@
 # chat
 
-Intoduction
+# Intoduction
 
 This project aims to create a chat application that works on a simple terminal by establishing a connection between the client and the server using Python and websocket, allowing the message to be processed on the server and distributed back when sent by more than one client.
 
-How you can use this ?
+# How you can use this ?
 
 1- First of all, If you don't have python in your machine you have to install it.
     
@@ -24,6 +24,6 @@ How you can use this ?
 
 9- Finally, when you wants the leave chat, just close the terminal.
 
-Safety Concerns!
+# Safety Concerns!
 
 No protection  for access control, data, chat history!!!
